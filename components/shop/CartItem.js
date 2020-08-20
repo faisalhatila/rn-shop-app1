@@ -20,11 +20,11 @@ const CartItem = (props) => {
   return (
     <View style={styles.cartItem}>
       <View style={styles.itemData}>
-        <Text style={styles.mainText}>QTY</Text>
-        <Text style={styles.mainText}>TITLE</Text>
+        <Text style={styles.mainText}>{props.quantity}</Text>
+        <Text style={styles.mainText}>{props.title}</Text>
       </View>
       <View style={styles.itemData}>
-        <Text style={styles.amount}>$AMT</Text>
+        <Text style={styles.amount}>${props.amount.toFixed(2)}</Text>
         <TouchableCmp onPress={props.onRemove} style={styles.deleteButton}>
           <Ionicons
             name={Platform.OS === "android" ? "md-trash" : "ios-trash"}

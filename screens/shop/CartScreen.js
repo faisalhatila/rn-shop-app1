@@ -8,9 +8,9 @@ import CartItem from "../../components/shop/CartItem";
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
-    const transformedCartItem = [];
+    const transformedCartItems = [];
     for (const key in state.cart.items) {
-      transformedCartItem.push({
+      transformedCartItems.push({
         productId: key,
         productTitle: state.cart.items[key].productTitle,
         productPrice: state.cart.items[key].productPrice,
@@ -18,14 +18,13 @@ const CartScreen = (props) => {
         sum: state.cart.items[key].sum,
       });
     }
-    return transformedCartItem;
-    return;
+    return transformedCartItems;
   });
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Total :{" "}
+          Total :
           <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
         </Text>
         <Button
@@ -35,9 +34,16 @@ const CartScreen = (props) => {
         />
       </View>
       <FlatList
-        data={cart}
+        data={cartItems}
         keyExtractor={(item) => item.productId}
-        renderItem={CartItem}
+        renderItem={(itemData) => (
+          <CartItem
+            quantity={itemData.item.quantity}
+            title={itemData.item.productTitle}
+            amount={itemData.item.sum}
+            onRemove={() => {}}
+          />
+        )}
       />
     </View>
   );
