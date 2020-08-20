@@ -4,6 +4,7 @@ import * as Font from "expo-font";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import productReducer from "./store/reducers/products";
+import cartReducer from "./store/reducers/cart";
 import ShopNavigator from "./navigation/ShopNavigator";
 import { enableScreens } from "react-native-screens";
 import { AppLoading } from "expo";
@@ -17,6 +18,7 @@ const fetchFonts = () => {
 enableScreens();
 const rootReducer = combineReducers({
   products: productReducer,
+  cart: cartReducer,
 });
 
 const store = createStore(rootReducer);
