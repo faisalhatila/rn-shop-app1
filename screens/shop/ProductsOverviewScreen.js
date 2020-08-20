@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, FlatList, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import ProductItem from "../../components/shop/ProductItem";
-import * as cartAction from "../../store/actions/cart";
+import * as cartActions from "../../store/actions/cart";
 const ProductsOverViewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
   const dispatch = useDispatch();
