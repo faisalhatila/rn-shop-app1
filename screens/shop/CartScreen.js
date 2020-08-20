@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 
@@ -13,7 +13,9 @@ const CartScreen = (props) => {
         </Text>
         <Button title="Order Now" />
       </View>
-      <View>Cart Items</View>
+      <View>
+        <Text>Cart Items</Text>
+      </View>
     </View>
   );
 };
