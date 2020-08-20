@@ -1,10 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+} from "react-native";
 
 const ProductDetailScreen = (props) => {
   return (
     <View>
-      <Text></Text>
+      <Text>Product Detail Screen</Text>
     </View>
   );
 };
