@@ -23,4 +23,10 @@ const ProductDetailScreen = (props) => {
 
 const styles = StyleSheet.create({});
 
+ProductDetailScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: navData.navigation.getParam("productTitle"),
+  };
+};
+
 export default ProductDetailScreen;
