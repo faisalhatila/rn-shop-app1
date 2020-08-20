@@ -21,7 +21,7 @@ const ProductsOverViewScreen = (props) => {
             });
           }}
           onAddToCart={() => {
-            dispatch(cartAction.addToCart(itemData.item));
+            dispatch(cartActions.addToCart(itemData.item));
           }}
         />
       )}
