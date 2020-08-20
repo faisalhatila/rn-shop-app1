@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
+import Order from "../../models/order";
 
 const OrdersScreen = (props) => {
   const orders = useSelector((state) => state.orders.orders);
@@ -13,5 +14,7 @@ const OrdersScreen = (props) => {
 };
 
 const styles = StyleSheet.create({});
-
+OrdersScreen.navigationOptions = {
+  headerTitle = "Your Orders"
+}
 export default OrdersScreen;
