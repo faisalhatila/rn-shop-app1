@@ -8,7 +8,7 @@ import cartReducer from "./store/reducers/cart";
 import ShopNavigator from "./navigation/ShopNavigator";
 import { enableScreens } from "react-native-screens";
 import { AppLoading } from "expo";
-
+import orderReducer from "./store/reducers/orders";
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -19,6 +19,7 @@ enableScreens();
 const rootReducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
+  order: orderReducer,
 });
 
 const store = createStore(rootReducer);
