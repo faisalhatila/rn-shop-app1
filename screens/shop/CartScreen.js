@@ -5,6 +5,20 @@ import Colors from "../../constants/Colors";
 
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
+  const cartItems = useSelector((state) => {
+    const transformedCartItem = [];
+    for (const key in state.cart.items) {
+      transformedCartItem.push({
+        productId: key,
+        productTitle: state.cart.items[key].productTitle,
+        productPrice: state.cart.items[key].productPrice,
+        quantity: state.cart.items[key].quantity,
+        sum: state.cart.items[key].sum,
+      });
+    }
+    return transformedCartItem;
+    return;
+  });
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
@@ -12,7 +26,11 @@ const CartScreen = (props) => {
           Total :{" "}
           <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
         </Text>
-        <Button title="Order Now" />
+        <Button
+          color={Colors.primaryColor}
+          title="Order Now"
+          disabled={cartItems.length === 0}
+        />
       </View>
       <View>
         <Text>Cart Items</Text>
