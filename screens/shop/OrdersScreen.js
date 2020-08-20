@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, Text } from "react-native";
+import { useSelector } from "react-redux";
 
 const OrdersScreen = (props) => {
+  const orders = useSelector((state) => state.orders.orders);
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <FlatList
+      data={orders}
+      renderItem={(itemData) => <Text>{itemData.item.totalAmount}</Text>}
+    />
   );
 };
 
