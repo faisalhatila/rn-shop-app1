@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import ProductItem from "../../components/shop/ProductItem";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../../components/UI/HeaderButton";
 const UserProductScreen = (props) => {
   const userProducts = useSelector((state) => state.products.userProducts);
   return (
@@ -18,6 +20,25 @@ const UserProductScreen = (props) => {
       )}
     />
   );
+};
+
+UserProductScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Your Products",
+    headerLeft: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      );
+    },
+  };
 };
 
 const styles = StyleSheet.create({});
