@@ -7,7 +7,7 @@ const OrderItem = (props) => {
   return (
     <View style={styles.orderItem}>
       <View style={styles.summary}>
-        <Text style={styles.totalAmount}>$ {props.amount.toFixed(2)}</Text>
+        <Text style={styles.totalAmount}>${props.amount}</Text>
         <Text style={styles.date}>{props.date}</Text>
       </View>
       <Button color={Colors.primaryColor} title="Show Details" />
