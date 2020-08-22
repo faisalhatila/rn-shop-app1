@@ -9,9 +9,7 @@ import {
   Platform,
   TouchableNativeFeedback,
 } from "react-native";
-import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { color } from "react-native-reanimated";
 const CartItem = (props) => {
   let TouchableCmp = TouchableOpacity;
   if (Platform.OS === "android" && Platform.Version >= 21) {
@@ -25,7 +23,7 @@ const CartItem = (props) => {
       </View>
       <View style={styles.itemData}>
         <Text style={styles.amount}>${props.amount.toFixed(2)}</Text>
-        {props.deleteable && (
+        {props.deletable && (
           <TouchableCmp onPress={props.onRemove} style={styles.deleteButton}>
             <Ionicons
               name={Platform.OS === "android" ? "md-trash" : "ios-trash"}
