@@ -6,6 +6,7 @@ import cart from "../../store/reducers/cart";
 import CartItem from "../../components/shop/CartItem";
 import * as cartActions from "../../store/actions/cart";
 import * as orderActions from "../../store/actions/orders";
+import Card from "../../components/UI/Card";
 
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
@@ -27,7 +28,7 @@ const CartScreen = (props) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.screen}>
-      <View style={styles.summary}>
+      <Card style={styles.summary}>
         <Text style={styles.summaryText}>
           Total :
           <Text style={styles.amount}>
@@ -44,7 +45,7 @@ const CartScreen = (props) => {
             );
           }}
         />
-      </View>
+      </Card>
       <FlatList
         data={cartItems}
         keyExtractor={(item) => item.productId}
