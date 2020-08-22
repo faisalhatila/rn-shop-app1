@@ -79,16 +79,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
     padding: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.6,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: "#fff",
   },
   summaryText: {
     fontFamily: "open-sans-bold",
