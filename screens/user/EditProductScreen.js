@@ -1,21 +1,25 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
-  Text,
-  StyleSheet,
   ScrollView,
+  Text,
   TextInput,
+  StyleSheet,
   Platform,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector, useDispatch } from "react-redux";
+
 import HeaderButton from "../../components/UI/HeaderButton";
-import { useSelector } from "react-redux";
+import * as productsActions from "../../store/actions/products";
 
 const EditProductScreen = (props) => {
   const prodId = props.navigation.getParam("productId");
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId)
   );
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState(editedProduct ? editedProduct.title : "");
   const [imageUrl, setImageUrl] = useState(
     editedProduct ? editedProduct.imageUrl : ""
@@ -26,11 +30,21 @@ const EditProductScreen = (props) => {
   );
 
   const submitHandler = useCallback(() => {
-    console.log("Submitted");
-  }, []);
+    if (editedProduct) {
+      dispatch(
+        productsActions.updateProduct(prodId, title, description, imageUrl)
+      );
+    } else {
+      dispatch(
+        productsActions.createProduct(title, description, imageUrl, +price)
+      );
+    }
+  }, [dispatch, prodId, title, description, imageUrl, price]);
+
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });
   }, [submitHandler]);
+
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -47,7 +61,7 @@ const EditProductScreen = (props) => {
           <TextInput
             style={styles.input}
             value={imageUrl}
-            onChangeText={(text) => setImageUrl()}
+            onChangeText={(text) => setImageUrl(text)}
           />
         </View>
         {editedProduct ? null : (
@@ -72,8 +86,9 @@ const EditProductScreen = (props) => {
     </ScrollView>
   );
 };
+
 EditProductScreen.navigationOptions = (navData) => {
-  const submitFunction = navData.navigation.getParam("submit");
+  const submitFn = navData.navigation.getParam("submit");
   return {
     headerTitle: navData.navigation.getParam("productId")
       ? "Edit Product"
@@ -86,7 +101,7 @@ EditProductScreen.navigationOptions = (navData) => {
             iconName={
               Platform.OS === "android" ? "md-checkmark" : "ios-checkmark"
             }
-            onPress={submitFunction}
+            onPress={submitFn}
           />
         </HeaderButtons>
       );
