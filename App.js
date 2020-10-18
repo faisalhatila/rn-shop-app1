@@ -6,10 +6,12 @@ import ReduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 import productReducer from "./store/reducers/products";
 import cartReducer from "./store/reducers/cart";
-import ShopNavigator from "./navigation/ShopNavigator";
+// import ShopNavigator from "./navigation/ShopNavigator";
+import NavigationContainer from "./navigation/NavigationContainer";
 import { enableScreens } from "react-native-screens";
 import { AppLoading } from "expo";
 import orderReducer from "./store/reducers/orders";
+import authReducer from "./store/reducers/auth";
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -21,6 +23,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
   order: orderReducer,
+  auth:authReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
@@ -37,7 +40,7 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <ShopNavigator />
+      <NavigationContainer />
     </Provider>
   );
 }

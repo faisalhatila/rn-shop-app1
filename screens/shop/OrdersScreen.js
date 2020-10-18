@@ -1,13 +1,50 @@
-import React from "react";
-import { FlatList, StyleSheet, Text, Platform } from "react-native";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  Platform,
+  ActivityIndicator,
+  View,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Order from "../../models/order";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import OrderItem from "../../components/shop/OrderItem";
+import * as orderActions from "../../store/actions/orders";
+import Colors from "../../constants/Colors";
 
 const OrdersScreen = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
   const orders = useSelector((state) => state.order.orders);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setIsLoading(true);
+    dispatch(orderActions.fetchOrders()).then(() => {
+      setIsLoading(false);
+    });
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
+      </View>
+    );
+  }
+
+  if (orders.length === 0) {
+    return (
+      <View
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <Text>No orders found, may be ordering some products some?</Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
       data={orders}
@@ -22,7 +59,6 @@ const OrdersScreen = (props) => {
   );
 };
 
-const styles = StyleSheet.create({});
 OrdersScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "Your Orders",
@@ -41,4 +77,9 @@ OrdersScreen.navigationOptions = (navData) => {
     },
   };
 };
+
+const styles = StyleSheet.create({
+  centered: { flex: 1, justifyContent: "center", alignItems: "center" },
+});
+
 export default OrdersScreen;
